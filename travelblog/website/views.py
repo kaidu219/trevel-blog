@@ -1,14 +1,26 @@
 from django.shortcuts import render
+from .models import Feedback
 
 # Create your views here.
 
 from django.shortcuts import render, HttpResponse
 
+
 def index(request):
-    return render(request, 'index.html')
+    feedback = Feedback.objects.all()
+
+    context = {
+        'feedback': feedback,
+    }
+
+    return render(request, 'index.html', context)
 
 def contact_us(request):
     return render(request, 'contact.html')
 
 def about_us(request):
     return render(request, 'about.html')
+
+def destination(request):
+    return render(request, 'destination.html')
+
