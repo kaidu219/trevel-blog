@@ -1,12 +1,9 @@
 {% load static %}
-<nav
-      class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-      id="ftco-navbar"
-    >
+{% load active_link_tags %}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+      id="ftco-navbar">
       <div class="container">
-        <a class="navbar-brand" href="index.html"
-          >Vacation<span>Travel Agency</span></a
-        >
+        <a class="navbar-brand" href="{% url 'home' %}">Vacation<span>Travel Agency</span></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -19,25 +16,51 @@
           <span class="oi oi-menu"></span> Menu
         </button>
 
+        {% url 'home' as index %}
+        {% url 'about' as about %}
+        {% url 'destination' as destination %}
+        {% url 'blog' as blog %}
+        {% url 'contact' as contact %}
+        {% url 'booknow' as booknow %}
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <li {% if '/' == request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}> 
+              <a class='nav-link' href="{% url 'home' %}">Home</a>
             </li>
-            <li class="nav-item">
-              <a href="{% url 'about' %}" class="nav-link">About</a>
+            <li {% if '/about/' == request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}> 
+              <a class='nav-link' href="{% url 'about' %}">About</a>
             </li>
-            <li class="nav-item">
-              <a href="{% url 'destination' %}" class="nav-link">Destination</a>
+            <li {% if '/destination/' == request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}> 
+              <a class='nav-link' href="{% url 'destination' %}">Destination</a>
             </li>
-            <li class="nav-item">
-              <a href="blog.html" class="nav-link">Blog</a>
+            <li {% if '/blog/' == request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}> 
+              <a class='nav-link' href="">Blog</a>
             </li>
-            <li class="nav-item">
-              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+            <li {% if '/contact/' == request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}> 
+              <a class='nav-link' href="{% url 'contact' %}">Contact</a>
             </li>
             <li class="nav-item cta">
-              <a href="#" class="nav-link">Book Now</a>
+              <a class='nav-link' href="contact.html">Book Now</a>
             </li>
           </ul>
         </div>

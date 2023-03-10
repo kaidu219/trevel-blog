@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="en">
   <head>
-    <title>Vacation - Free Bootstrap 4 Template by Colorlib</title>
+    <title>{% block title %} {% endblock %}</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -41,3 +41,6 @@
     {% include 'includes/recept_post.html' %}
 
     {% include 'includes/footers.html' %}
+
+   
+
