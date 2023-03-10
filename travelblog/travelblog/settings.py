@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'active_link',
     'website.apps.WebsiteConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [

@@ -50,7 +50,7 @@
                 {% else %}
                   class="nav-item"
                 {% endif %}> 
-              <a class='nav-link' href="">Blog</a>
+              <a class='nav-link' href="{% url 'blog' %}">Blog</a>
             </li>
             <li {% if '/contact/' == request.path %}
                   class="nav-item active"
