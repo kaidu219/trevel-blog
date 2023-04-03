@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block title %}
-Blog Details - {{ blog.title }}
+Blog - {{ blog.title }}
 {% endblock %}
 {% block content %}
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{% static 'images/bg_1.jpg' %}');" data-stellar-background-ratio="0.5">
@@ -20,6 +20,7 @@ Blog Details - {{ blog.title }}
       </div>
     </section>
 
+
     <section class="ftco-section ftco-no-pt ftco-no-pb">
       <div class="container">
         <div class="row">
@@ -36,21 +37,15 @@ Blog Details - {{ blog.title }}
             {% autoescape off %}
             <p>{{text2}}</p>
             {% endautoescape %}
-            <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-            <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-            <p>
-              <img src="images/image_4.jpg" alt="" class="img-fluid">
-            </p>
-            <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
-            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
-            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
             <div class="tag-widget post-tag-container mb-5 mt-5">
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
+                {% for tag in blog.tags.all %}
+                <a href="#" class="tag-cloud-link">{{tag}}</a>
+                {% endfor %}
+                {% comment %} {% for category in blog.categories.title %}
+                <a href="#" class="tag-cloud-link">{{category}}</a>
+                {% endfor %} {% endcomment %}
+                
               </div>
             </div>
             
@@ -190,21 +185,16 @@ Blog Details - {{ blog.title }}
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3>Categories</h3>
-                <li><a href="#">Travel <span>(12)</span></a></li>
-                <li><a href="#">Tour <span>(22)</span></a></li>
-                <li><a href="#">Destination <span>(37)</span></a></li>
-                <li><a href="#">Drinks <span>(42)</span></a></li>
-                <li><a href="#">Foods <span>(14)</span></a></li>
-                <li><a href="#">Travel <span>(140)</span></a></li>
+                {% for category_name, article_count in category_count.items %}
+                  <li><a href="#">{{ category_name }} <span>{{ article_count }}</span></a></li>
+                {% endfor %}                
               </div>
-            </div>
-
             <div class="sidebar-box ftco-animate">
               <h3>Recent Blog</h3>
               <div class="block-21 mb-4 d-flex">
                 <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a><h3>
                   <div class="meta">
                     <div><a href="#"><span class="icon-calendar"></span> August 21, 2019</a></div>
                     <div><a href="#"><span class="icon-person"></span> Admin</a></div>
@@ -239,14 +229,9 @@ Blog Details - {{ blog.title }}
             <div class="sidebar-box ftco-animate">
               <h3>Tag Cloud</h3>
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">dish</a>
-                <a href="#" class="tag-cloud-link">menu</a>
-                <a href="#" class="tag-cloud-link">food</a>
-                <a href="#" class="tag-cloud-link">sweet</a>
-                <a href="#" class="tag-cloud-link">tasty</a>
-                <a href="#" class="tag-cloud-link">delicious</a>
-                <a href="#" class="tag-cloud-link">desserts</a>
-                <a href="#" class="tag-cloud-link">drinks</a>
+                {% for tag in blog.tags.all %}
+                <a href="#" class="tag-cloud-link">{{ tag }}</a>
+                {% endfor %}
               </div>
             </div>
 

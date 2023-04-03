@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import Feedback
 
-# Create your views here.
 
 from django.shortcuts import render, HttpResponse
 
@@ -23,4 +22,3 @@ def about_us(request):
 
 def destination(request):
     return render(request, 'destination.html')
-

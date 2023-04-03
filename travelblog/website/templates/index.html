@@ -287,8 +287,7 @@ Home page
               <a
                 href="#"
                 class="img"
-                style="background-image: url(images/place-3.jpg)"
-              >
+                style="background-image: url(images/place-3.jpg)">
                 <div class="text">
                   <h3>Thailand</h3>
                   <span>5 Tours</span>
@@ -480,8 +479,8 @@ Home page
                     </p>
                     <div class="d-flex align-items-center">
                       <div
-                        class="user-img" style="background-image: url({{ feed.photo }})">
-                      <img src='{{ feed.photo.url }}'>
+                        class="user-img" style="background-image: url('{{ feed.photo.url }}')">
+                      {% comment %} <img src='{{ feed.photo.url }}'> {% endcomment %}
                     </div>
                       <div class="pl-3">
                         <p class="name">{{ feed.first_name }}  {{ feed.last_name }}</p>
