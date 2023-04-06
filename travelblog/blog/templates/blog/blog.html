@@ -24,15 +24,15 @@ Blog
           {% for blog in all_blog %}
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <a href="{% url 'blog-detail' blog.pk %}" class="block-20" style="background-image: url('{{ blog.photo }}');">
+              <a href="{% url 'blog-detail' blog.pk %}" class="block-20" style="background-image: url('{{ blog.photo.url }}');">
               </a>
               <div class="text mt-3 float-right d-block">
               	<div class="d-flex align-items-center mb-4 topp">
               		<div class="one">
-              			<span class="day">{{blog.created_date|date:'d'}}</span>
+              			<span class="day">{{blog.created_date|date:'j'}}</span>
               		</div>
               		<div class="two">
-              			<span class="yr">{{blog.created_date|date:'y'}}</span>
+              			<span class="yr">{{blog.created_date|date:'Y'}}</span>
               			<span class="mos">{{blog.created_date|date:'M'}}</span>
               		</div>
               	</div>

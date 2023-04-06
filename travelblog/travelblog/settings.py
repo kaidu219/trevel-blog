@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'active_link',
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',
+    'tours.apps.ToursConfig',
 ]
 
 MIDDLEWARE = [
@@ -83,9 +84,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'trevelblogdb',
-        'USER': 'postgres',
-        'PASSWORD': 'qwerty123$',
-        'HOST': 'localhost'
+        'USER': 'student_2',
+        'PASSWORD': '1111',
+        'PORT': '5432',
     }
 }
 

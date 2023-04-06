@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block title %}
-{{ blog.title }}
+{{ tour.tour_name }}
 {% endblock %}
 {% block content %}
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{% static 'images/bg_1.jpg' %}');" data-stellar-background-ratio="0.5">
@@ -10,11 +10,11 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate pb-5 text-center">
-            <h1 class="mb-3 bread">Blog Details</h1>
+            <h1 class="mb-3 bread">Tour Details</h1>
             <p class="breadcrumbs">
               <span class="mr-2"><a href="{% url 'home' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> 
-              <span class="mr-2"><a href="{% url 'blog' %}">Blog <i class="ion-ios-arrow-forward"></i></a></span> 
-              <span>Blog Single <i class="ion-ios-arrow-forward"></i></span></p>
+              <span class="mr-2"><a href="{% url 'tours' %}">Destination <i class="ion-ios-arrow-forward"></i></a></span> 
+              <span>Tour Detail <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -25,27 +25,42 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 order-md-last ftco-animate py-md-5 mt-md-5">
-            <h2 class="mb-3">{{ blog.title }}</h2>
-            {% autoescape off %}
-            <p>{{text1}}</p>
-            {% endautoescape %}
-            {% if blog.photo %}
-            <p>
-              <img src="{{ blog.photo.url }}" alt="" class="img-fluid"> 
+            <h2 class="mb-3">{{ tour.tour_name }}</h2>
+            <p class="location">
+            <span class="ion-ios-map "></span> {{ tour.city }}, {{ tour.country }}
             </p>
-            {% endif %}
             {% autoescape off %}
-            <p>{{text2}}</p>
+            <p>{{ tour.description }}</p>
             {% endautoescape %}
-            <div class="tag-widget post-tag-container mb-5 mt-5">
-              <div class="tagcloud">
-                {% for tag in blog.tags.all %}
-                <a href="#" class="tag-cloud-link">{{tag}}</a>
-                {% endfor %}
-                
-              </div>
-            </div>
+            {% if tour.main_photo %}
+            <p>
+              <img src="{{ tour.main_photo.url }}" alt="" class="img-fluid"> 
+            </p>
+           <p>
+            <span>Цена за персону: </span>{{ tour.price }}$
+           </p>
+           <p>
+            <span>Длительность тура: </span>{{ tour.duration_tour }} дней
+           </p>
+           <p>
+            <span>Название отеля: </span>{{ tour.hotel }}
+           </p>
+           <p>
+            <span>Дата начала тура: </span>{{ tour.start_date }}
+           </p>
+            <p>
+              <span class="flaticon-shower">Количество ванных комнат в номере: </span>{{ tour.numb_bath_room }}
+            </p>
+            <p>
+              <span class="flaticon-king-size">Количество спальн в номере</span>{{ tour.numb_seats_room }}
+            </p>
+            <p>
+              <span class="flaticon-mountains">Рядом есть: </span> {{ tour.nearby }}
+            </p>
             
+            {% endif %}
+            
+{% comment %}             
             <div class="about-author d-flex p-4 bg-light">
               <div class="bio mr-5">
                 <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
@@ -138,10 +153,10 @@
                     <p><a href="#" class="reply">Reply</a></p>
                   </div>
                 </li>
-              </ul>
+              </ul> {% endcomment %}
               <!-- END comment-list -->
               
-              <div class="comment-form-wrap pt-5">
+              {% comment %} <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Leave a comment</h3>
                 <form action="#" class="p-5 bg-light">
                   <div class="form-group">
@@ -167,7 +182,7 @@
 
                 </form>
               </div>
-            </div>
+            </div> {% endcomment %}
 
           </div> <!-- .col-md-8 -->
           <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
@@ -181,9 +196,9 @@
             </div>
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
-                {% for category_name in categories %}
-                  <li><a href="#">{{ category_name.name }} <span>{{ category_name.posts.all.count }}</span></a></li>
+                <h3>Countries</h3>
+                {% for country in countries %}
+                  <li><a href="#">{{ country.name }} <span>{{ country.tours.all.count }}</span></a></li>
                 {% endfor %}                
               </div>
             <div class="sidebar-box ftco-animate">
@@ -194,23 +209,24 @@
                 <div class="text">
                   <h3 class="heading"><a href="{% url 'blog-detail' post.pk %}">{{ post.title }}</a><h3>
                   <div class="meta">
-                    <div><a href="{% url 'blog-detail' post.pk %}"><span class="icon-calendar"></span> {{post.created_date|date:'F j, Y'}} </a></div>
-                    <div><a href="{% url 'blog-detail' post.pk %}"><span class="icon-person"></span> {{ post.author }}</a></div>
-                    <div><a href="{% url 'blog-detail' post.pk %}"><span class="icon-chat"></span> {{ post.comments.count }}</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span> {{post.created_date|date:'F j, Y'}} </a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
                   </div>
                 </div>
+                
               </div>
               {% endfor %}
-            </div>
+            </div> 
 
-            <div class="sidebar-box ftco-animate">
+            {% comment %} <div class="sidebar-box ftco-animate">
               <h3>Tag Cloud</h3>
               <div class="tagcloud">
                 {% for tag in tags %}
                 <a href="#" class="tag-cloud-link">{{ tag }}</a>
                 {% endfor %}
               </div>
-            </div>
+            </div> {% endcomment %}
 
             <div class="sidebar-box ftco-animate">
               <h3>Paragraph</h3>

@@ -4,5 +4,5 @@ from .models import *
 
 admin.site.register(Blog)
 admin.site.register(Tag)
-admin.site.register(Categories)
-
+admin.site.register(Category)
+admin.site.register(Comment)

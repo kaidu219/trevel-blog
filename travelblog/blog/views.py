@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator
 from django.db.models import Count
-from .models import Blog, Categories
+from .models import Blog, Category, Tag, Comment
 from django.contrib.postgres.aggregates import ArrayAgg
 # Create your views here.
 
@@ -30,19 +30,17 @@ class BlogDateilView(TemplateView):
         # blog = Blog.objects.prefetch_related('tags').get(pk=kwargs.get('id'))
         blog = Blog.objects.get(pk=kwargs.get('id'))
         len_text = len(blog.text)
-        categories = Categories.objects.all()
-        category_count = {}
-        for category in categories:
-            category_count[category.name] = Blog.objects.filter(categories__name=category.name).count()
+        categories = Category.objects.all()
+        posts = Blog.objects.all()
+        tags = Tag.objects.all()
 
+        # comments = Comment.objects.get(id=blog.id)
+        # context['comment'] = comments
 
-        
-        # categories = Categories.objects.annotate(num_posts=Count('blog'))
- 
         context['categories'] = categories
-        context['category_count'] = category_count
-        context['tag'] = []
+        context['tags'] = tags
         context['blog'] = blog
+        context['posts'] = posts
         context['text1'] = blog.text[:len_text//2]
         context['text2'] = blog.text[len_text//2:]
         return context

@@ -7,90 +7,34 @@
         </div>
       </div>
       <div class="row d-flex">
+        {% for post in posts %}
         <div class="col-md-4 d-flex ftco-animate">
           <div class="blog-entry justify-content-end">
             <a
               href="blog-single.html"
               class="block-20"
-              style="background-image: url('{% static "images/image_1.jpg" %}')"
+              style="background-image: url('{{ post.photo.url }}')"
             >
             </a>
             <div class="text mt-3 float-right d-block">
               <div class="d-flex align-items-center mb-4 topp">
                 <div class="one">
-                  <span class="day">21</span>
+                  <span class="day">{{post.created_date|date:'j'}}</span>
                 </div>
                 <div class="two">
-                  <span class="yr">2019</span>
-                  <span class="mos">August</span>
+                  <span class="yr">{{post.created_date|date:'Y'}}</span>
+                  <span class="mos">{{post.created_date|date:'M'}}</span>
                 </div>
               </div>
               <h3 class="heading">
-                <a href="#">Why Lead Generation is Key for Business Growth</a>
+                <a href="{% url 'blog-detail' post.pk %}">{{ post.title }}</a>
               </h3>
-              <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia.
-              </p>
+              {% autoescape off %}
+                <p>{{ post.text|truncatewords:10 }}</p>
+                {% endautoescape %}
             </div>
           </div>
         </div>
-        <div class="col-md-4 d-flex ftco-animate">
-          <div class="blog-entry justify-content-end">
-            <a
-              href="blog-single.html"
-              class="block-20"
-              style="background-image: url('{% static "images/image_2.jpg" %}')"
-            >
-            </a>
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center mb-4 topp">
-                <div class="one">
-                  <span class="day">21</span>
-                </div>
-                <div class="two">
-                  <span class="yr">2019</span>
-                  <span class="mos">August</span>
-                </div>
-              </div>
-              <h3 class="heading">
-                <a href="#">Why Lead Generation is Key for Business Growth</a>
-              </h3>
-              <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex ftco-animate">
-          <div class="blog-entry">
-            <a
-              href="blog-single.html"
-              class="block-20"
-              style="background-image: url('{% static "images/image_3.jpg" %}')"
-            >
-            </a>
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center mb-4 topp">
-                <div class="one">
-                  <span class="day">21</span>
-                </div>
-                <div class="two">
-                  <span class="yr">2019</span>
-                  <span class="mos">August</span>
-                </div>
-              </div>
-              <h3 class="heading">
-                <a href="#">Why Lead Generation is Key for Business Growth</a>
-              </h3>
-              <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+        {% endfor %}
     </div>
   </section>
