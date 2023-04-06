@@ -8,6 +8,7 @@ class Country(models.Model):
 
     name = models.CharField(max_length=150)
     short_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='photos/countries/%Y/%m/%d/', null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
@@ -34,7 +35,7 @@ class Tours(models.Model):
     price = models.IntegerField(verbose_name='Стоимость тура')
     duration_tour = models.IntegerField(default=1, verbose_name='Длительность тура')
     city = models.CharField(max_length=255, verbose_name='Город')
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name='Страна')
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name='Страна', related_name="country_tours")
     hotel = models.CharField(max_length=255, verbose_name='Название отеля')
     numb_seats_room = models.IntegerField(verbose_name='Количество мест в номере')
     numb_bath_room = models.IntegerField(verbose_name='Количество ванн в номере')

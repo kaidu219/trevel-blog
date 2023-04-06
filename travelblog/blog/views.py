@@ -12,10 +12,10 @@ class BlogView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         all_blog = Blog.objects.all().order_by('-created_date')
-        paginator = Paginator(all_blog, 6)
+        paginator = Paginator(all_blog, 1)
         page = self.request.GET.get('page')
         paged_blog = paginator.get_page(page)
-        context['paged_cars'] = paged_blog
+        context['paged_blog'] = paged_blog
         context['all_blog'] = all_blog
         return context
         

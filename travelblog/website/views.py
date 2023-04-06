@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Feedback
 from blog.models import Blog
-from tours.models import Tours
+from tours.models import Tours, Country
 
 
 from django.shortcuts import render, HttpResponse
@@ -11,10 +11,13 @@ def index(request):
     feedback = Feedback.objects.all()
     post = Blog.objects.all()[:3]
     tours = Tours.objects.all()[:6]
+    countries = Country.objects.all()
     context = {
         'posts': post,
         'feedback': feedback,
-        'tours': tours
+        'tours': tours,
+        'countries': countries,
+
     }
 
     return render(request, 'index.html', context)

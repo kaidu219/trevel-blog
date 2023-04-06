@@ -27,47 +27,21 @@ Destination
           </div>
         </div>
         <div class="row">
-        	<div class="col-md-3 ftco-animate">
-        		<div class="project-destination">
-        			<a href="#" class="img" style="background-image: url(images/place-1.jpg);">
-        				<div class="text">
-        					<h3>Singapore</h3>
-        					<span>8 Tours</span>
-        				</div>
-        			</a>
-        		</div>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<div class="project-destination">
-        			<a href="#" class="img" style="background-image: url(images/place-2.jpg);">
-        				<div class="text">
-        					<h3>Canada</h3>
-        					<span>2 Tours</span>
-        				</div>
-        			</a>
-        		</div>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<div class="project-destination">
-        			<a href="#" class="img" style="background-image: url(images/place-3.jpg);">
-        				<div class="text">
-        					<h3>Thailand</h3>
-        					<span>5 Tours</span>
-        				</div>
-        			</a>
-        		</div>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<div class="project-destination">
-        			<a href="#" class="img" style="background-image: url(images/place-4.jpg);">
-        				<div class="text">
-        					<h3>Autralia</h3>
-        					<span>5 Tours</span>
-        				</div>
-        			</a>
-        		</div>
-        	</div>
-        </div>
+			<div class="carousel-testimony owl-carousel ftco-owl">
+			  {% for country in countries %}
+				<div class="col-md-16 ftco-animate testimony-wrap">
+				  <div class="project-destination">
+					<a href="#" class="img" style="background-image: url({{ country.image.url }});">
+					  <div class="text">
+						<h3>{{ country.name }}</h3>
+						<span>{{ country.country_tours.all.count }} Tours</span>
+					  </div>
+					</a>
+				  </div>
+				</div>
+				{% endfor %}
+		  </div>
+		  </div>
     	</div>
     </section>
 
@@ -155,7 +129,7 @@ Destination
           </div>
         </div>
         <div class="row">
-			{% for tour in tours%}
+			{% for tour in paged_tours%}
         	<div class="col-md-4 ftco-animate">
 				<div class="project-wrap">
 				  <a href="#" class="img" style="background-image: url({{ tour.main_photo.url }})"></a>
@@ -180,15 +154,29 @@ Destination
         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
+				{% if paged_tours.has_other_pages %}
+				<ul>
+				  {% if paged_tours.has_previous %}
+					  {% if paged_tours.previous_page_number != 1 %}
+						<li><a href="#">&lt;&lt;</a></li>
+					  {% endif %}
+					  <li><a href="?page={{ paged_tours.previous_page_number }}">&lt;</a></li>
+				  {% endif %}
+				  {% for i in paged_tours.paginator.page_range %}     
+					{% if paged_tours.number == i %}
+					  <li class="active"><span>{{ i }}</span></li>
+					{% else %}
+					  <li class=""><span><a href="?page={{ i }}">{{ i }}</a></span></li>
+					{% endif%}
+				  {% endfor %}
+				  {% if paged_tours.has_next %}  
+					  <li><a href="?page={{ paged_tours.next_page_number }}">&gt;</a></li>
+					  {% if paged_tours.next_page_number < paged_tours.paginator.num_pages %}
+						<li><a href="?page={{ paged_tours.paginator.num_pages }}">&gt;&gt;</a></li>
+					  {% endif %} 
+				  {% endif %}    
+				</ul>
+				{% endif %}
             </div>
           </div>
         </div>

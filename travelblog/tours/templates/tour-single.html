@@ -198,7 +198,7 @@
               <div class="categories">
                 <h3>Countries</h3>
                 {% for country in countries %}
-                  <li><a href="#">{{ country.name }} <span>{{ country.tours.all.count }}</span></a></li>
+                  <li><a href="#">{{ country.name }} <span>{{ country.country_tours.all.count }}</span></a></li>
                 {% endfor %}                
               </div>
             <div class="sidebar-box ftco-animate">

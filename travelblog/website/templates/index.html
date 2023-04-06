@@ -254,61 +254,20 @@ Home page
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3 ftco-animate">
-            <div class="project-destination">
-              <a
-                href="#"
-                class="img"
-                style="background-image: url(images/place-1.jpg)"
-              >
-                <div class="text">
-                  <h3>Singapore</h3>
-                  <span>8 Tours</span>
+          <div class="carousel-testimony owl-carousel ftco-owl">
+            {% for country in countries %}
+              <div class="col-md-16 ftco-animate testimony-wrap">
+                <div class="project-destination">
+                  <a href="#" class="img" style="background-image: url({{ country.image.url }});">
+                    <div class="text">
+                      <h3>{{ country.name }}</h3>
+                      <span>{{ country.country_tours.all.count }} Tours</span>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-3 ftco-animate">
-            <div class="project-destination">
-              <a
-                href="#"
-                class="img"
-                style="background-image: url(images/place-2.jpg)"
-              >
-                <div class="text">
-                  <h3>Canada</h3>
-                  <span>2 Tours</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-3 ftco-animate">
-            <div class="project-destination">
-              <a
-                href="#"
-                class="img"
-                style="background-image: url(images/place-3.jpg)">
-                <div class="text">
-                  <h3>Thailand</h3>
-                  <span>5 Tours</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-3 ftco-animate">
-            <div class="project-destination">
-              <a
-                href="#"
-                class="img"
-                style="background-image: url(images/place-4.jpg)"
-              >
-                <div class="text">
-                  <h3>Autralia</h3>
-                  <span>5 Tours</span>
-                </div>
-              </a>
-            </div>
-          </div>
+              </div>
+              {% endfor %}
+        </div>
         </div>
       </div>
     </section>
