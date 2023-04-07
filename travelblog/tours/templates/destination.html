@@ -31,7 +31,7 @@ Destination
 			  {% for country in countries %}
 				<div class="col-md-16 ftco-animate testimony-wrap">
 				  <div class="project-destination">
-					<a href="#" class="img" style="background-image: url({{ country.image.url }});">
+					<a href="{% url 'country' country.slug %}" class="img" style="background-image: url({{ country.image.url }});">
 					  <div class="text">
 						<h3>{{ country.name }}</h3>
 						<span>{{ country.country_tours.all.count }} Tours</span>

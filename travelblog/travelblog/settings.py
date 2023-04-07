@@ -141,6 +141,15 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# email settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'carsellplatformdjango@gmail.com'
+EMAIL_HOST_PASSWORD = 'dljrqsiepjcdvbng'
+EMAIL_USE_TSL = False
+EMAIL_USE_SSL = True
+
+
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono',

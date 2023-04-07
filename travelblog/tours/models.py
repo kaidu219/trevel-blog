@@ -6,9 +6,11 @@ from ckeditor.fields import RichTextField
 
 class Country(models.Model):
 
+    slug = models.CharField(max_length=250, unique=True, primary_key=True)
     name = models.CharField(max_length=150)
     short_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='photos/countries/%Y/%m/%d/', null=True, blank=True)
+    about_country = RichTextField(blank=True, null=True, verbose_name='Описание страны')
 
     def __str__(self) -> str:
         return self.name
@@ -55,14 +57,3 @@ class Tours(models.Model):
         verbose_name_plural = 'Tours' 
 
 
-class Tour_Photo(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    tour_photo = models.ForeignKey(Tours, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.FileField(upload_to = 'photos/tour/tour_photos/%Y/%m/%d/')
-    
-    def __str__(self) -> str:
-        return str(self.tour_photo)
-        
-    class Meta:
-        verbose_name = 'Tour photo'
-        verbose_name_plural = 'Tour photos'   

@@ -255,13 +255,13 @@ Home page
         </div>
         <div class="row">
           <div class="carousel-testimony owl-carousel ftco-owl">
-            {% for country in countries %}
+            {% for c in countries %}
               <div class="col-md-16 ftco-animate testimony-wrap">
                 <div class="project-destination">
-                  <a href="#" class="img" style="background-image: url({{ country.image.url }});">
+                  <a href="{% url 'country' c.pk %}" class="img" style="background-image: url({{ c.image.url }});">
                     <div class="text">
-                      <h3>{{ country.name }}</h3>
-                      <span>{{ country.country_tours.all.count }} Tours</span>
+                      <h3>{{ c.name }}</h3>
+                      <span>{{ c.country_tours.all.count }} Tours</span>
                     </div>
                   </a>
                 </div>

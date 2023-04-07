@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from .models import Tours, Country
 from django.core.paginator import Paginator
 
@@ -11,7 +11,7 @@ class ToursView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tours = Tours.objects.all()
-        paginator = Paginator(tours, 2)
+        paginator = Paginator(tours, 3)
         page = self.request.GET.get('page')
         paged_tours = paginator.get_page(page)
         countries = Country.objects.all()
@@ -28,9 +28,18 @@ class ToursDetailView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print(context)
 
         tour = Tours.objects.get(pk=kwargs.get('id'))
         countries = Country.objects.all()
         context['tour'] = tour
         context['countries'] = countries
+        
         return context
+
+
+class CountryTourView(DetailView):
+    model = Country
+    context_object_name = 'country'
+    template_name = 'country.html'
+    pk_url_kwarg = 'slug'

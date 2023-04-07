@@ -1,0 +1,112 @@
+{% extends 'base2.html' %}
+
+{% load static %}
+{% block title %}
+Country Tours 
+{% endblock %}
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{% static "images/bg_1.jpg" %}'); margin: 30px;" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+        <div class="col-md-9 ftco-animate pb-5 text-center">
+          <h1 class="mb-3 bread">Places to Travel</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> 
+                                 <span>{{ country.name }}<i class="ion-ios-arrow-forward"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-counter img" id="section-counter">
+    <div class="container">
+      <div class="row d-flex">
+        <div class="col-md-6 d-flex">
+          <div
+            class="img d-flex align-self-stretch"
+            style="background-image: url({{ country.image.url }})"
+          ></div>
+        </div>
+        <div class="col-md-6 pl-md-5 py-5">
+          <div class="row justify-content-start pb-3">
+            <div class="col-md-12 heading-section ftco-animate">
+              <h2 class="mb-4">{{ country.name }}</h2>
+              <p>
+                {% autoescape off %}
+                {{ country.about_country }}
+                {% endautoescape %}
+                
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="ftco-section ftco-no-pt" style="margin: 30px;">
+      <div class="container">
+          <div class="row justify-content-center pb-4">
+        <div class="col-md-12 heading-section text-center ftco-animate">
+          <h2 class="mb-4">Tour in {{ country.name }}</h2>
+        </div>
+      </div>
+      <div class="row">
+         {%for tour in country.country_tours.all%}
+          <div class="col-md-4 ftco-animate">
+              <div class="project-wrap">
+                <a href="#" class="img" style="background-image: url({{ tour.main_photo.url }})"></a>
+                <div class="text p-4">
+                  <span class="price">${{ tour.price }}/person</span>
+                  <span class="days">{{ tour.duration_tour }} Days Tour</span>
+                  <h3><a href="{% url 'tour-detail' tour.pk %}">{{ tour.tour_name }}</a></h3>
+                  <p class="location">
+                    <span class="ion-ios-map"></span> {{ tour.city }}, {{ tour.country }}
+                  </p>
+                  <ul>
+                    <li><span class="flaticon-shower"></span>{{ tour.numb_bath_room }}</li>
+                    <li><span class="flaticon-king-size"></span>{{ tour.numb_seats_room }}</li>
+                    <li><span class="flaticon-mountains"></span>Near {{ tour.nearby }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+       
+          
+      </div>
+      {% comment %} <div class="row mt-5">
+        <div class="col text-center">
+          <div class="block-27">
+              {% if paged_tours.has_other_pages %}
+              <ul>
+                {% if paged_tours.has_previous %}
+                    {% if paged_tours.previous_page_number != 1 %}
+                      <li><a href="#">&lt;&lt;</a></li>
+                    {% endif %}
+                    <li><a href="?page={{ paged_tours.previous_page_number }}">&lt;</a></li>
+                {% endif %}
+                {% for i in paged_tours.paginator.page_range %}     
+                  {% if paged_tours.number == i %}
+                    <li class="active"><span>{{ i }}</span></li>
+                  {% else %}
+                    <li class=""><span><a href="?page={{ i }}">{{ i }}</a></span></li>
+                  {% endif%}
+                {% endfor %}
+                {% if paged_tours.has_next %}  
+                    <li><a href="?page={{ paged_tours.next_page_number }}">&gt;</a></li>
+                    {% if paged_tours.next_page_number < paged_tours.paginator.num_pages %}
+                      <li><a href="?page={{ paged_tours.paginator.num_pages }}">&gt;&gt;</a></li>
+                    {% endif %} 
+                {% endif %}    
+              </ul>
+              {% endif %}
+          </div>
+        </div> {% endcomment %}
+      </div>
+      </div>
+  </section>
+
+ {% endblock %}

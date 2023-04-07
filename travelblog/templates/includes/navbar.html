@@ -38,7 +38,7 @@
                 {% endif %}> 
               <a class='nav-link' href="{% url 'about' %}">About</a>
             </li>
-            <li {% if '/destination/' == request.path %}
+            <li {% if '/tours/' == request.path %}
                   class="nav-item active"
                 {% else %}
                   class="nav-item"
@@ -60,7 +60,7 @@
               <a class='nav-link' href="{% url 'contact' %}">Contact</a>
             </li>
             <li class="nav-item cta">
-              <a class='nav-link' href="contact.html">Book Now</a>
+              <a class='nav-link' href="{% url 'contact' %}">Book Now</a>
             </li>
           </ul>
         </div>
