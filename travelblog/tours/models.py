@@ -46,7 +46,7 @@ class Tours(models.Model):
     description = RichTextField(blank=True, null=True, verbose_name='Описание тура')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавление тура', editable=False)
     start_date = models.DateField(verbose_name='Дата начала тура', blank=True)
-
+    
 
     def __str__(self) -> str:
         return self.tour_name
