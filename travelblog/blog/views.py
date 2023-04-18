@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.core.paginator import Paginator
 from django.db.models import Count
-from .models import Blog, Category, Tag, Comment
+from .models import Post, Category, Tag, Comment
 from django.contrib.postgres.aggregates import ArrayAgg
+from django.views import View
 # Create your views here.
 
 class BlogView(TemplateView):
@@ -11,7 +12,7 @@ class BlogView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        all_blog = Blog.objects.all().order_by('-created_date')
+        all_blog = Post.objects.all().order_by('-created_date')
         paginator = Paginator(all_blog, 1)
         page = self.request.GET.get('page')
         paged_blog = paginator.get_page(page)
@@ -20,7 +21,7 @@ class BlogView(TemplateView):
         return context
         
 class BlogDateilView(TemplateView):
-    model = Blog
+    model = Post
     template_name = 'blog/blog-single.html'
     context_object_name = 'blog'
     pk_url_kwarg = 'id'
@@ -28,10 +29,10 @@ class BlogDateilView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # blog = Blog.objects.prefetch_related('tags').get(pk=kwargs.get('id'))
-        blog = Blog.objects.get(pk=kwargs.get('id'))
+        blog = Post.objects.get(pk=kwargs.get('id'))
         len_text = len(blog.text)
         categories = Category.objects.all()
-        posts = Blog.objects.all()
+        posts = Post.objects.all()
         tags = Tag.objects.all()
 
         # comments = Comment.objects.get(id=blog.id)
@@ -44,12 +45,15 @@ class BlogDateilView(TemplateView):
         context['text1'] = blog.text[:len_text//2]
         context['text2'] = blog.text[len_text//2:]
         return context
-    
-# def index(request):
-#     categories = Category.objects.all()
-#     category_count = {}
-#     for category in categories:
-#         category_count[category.name] = category.post_set.count()
 
-#     context = {'categories': categories, 'category_count': category_count}
-#     return render(request, 'index.html', context)
+
+class CategoryView(DetailView):
+    model = Category
+    context_object_name = 'category'
+    template_name = 'blog/category.html'
+    pk_url_kwarg = 'slug'
+    
+    def get_context_data(self, **kwargs):
+        kwargs["posts"] = Post.objects.filter(categories__in=self.get_queryset())
+        return super().get_context_data(**kwargs)
+    

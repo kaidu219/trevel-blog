@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Feedback
-from blog.models import Blog
+from blog.models import Post
 from tours.models import Tours, Country
 from .forms import ContactForm
 from django.contrib.auth.models import User
@@ -14,7 +14,7 @@ from django.shortcuts import render, HttpResponse
 
 def index(request):
     feedback = Feedback.objects.all()
-    post = Blog.objects.all()[:3]
+    post = Post.objects.all()[:3]
     tours = Tours.objects.all()[:6]
     countries = Country.objects.all()
     context = {
@@ -66,7 +66,7 @@ def contact_us(request):
     return render(request, 'contact.html', context)
 
 def about_us(request):
-    post = Blog.objects.all()[:3]
+    post = Post.objects.all()[:3]
     feedback = Feedback.objects.all()
     context = {
         'posts': post,
@@ -74,10 +74,11 @@ def about_us(request):
     }
     return render(request, 'about.html', context)
 
-# def destination(request):
-#     post = Blog.objects.all()[:3]
-#     tours = Tours.objects.all()
-#     context = {
-#         'tours': tours,
-#     }
-#     return render(request, 'destination.html', context)
+def destination(request):
+    post = Post.objects.all()[:3]
+    tours = Tours.objects.all()
+    context = {
+        'tours': tours,
+    }
+    return render(request, 'destination.html', context)
+   

@@ -10,7 +10,7 @@ Home page
         <div class="row">
           <div class="col-md-12">
             <div class="search-wrap-1 ftco-animate p-4">
-              <form action="#" class="search-property-1">
+              <form action="{% url 'search' %}" method="GET" class="search-property-1">
                 <div class="row">
                   <div class="col-lg align-items-end">
                     <div class="form-group">
@@ -23,7 +23,7 @@ Home page
                           type="text"
                           class="form-control"
                           placeholder="Search place"
-                        />
+                          name="keyword"/>
                       </div>
                     </div>
                   </div>
@@ -38,7 +38,7 @@ Home page
                           type="text"
                           class="form-control checkin_date"
                           placeholder="Check In Date"
-                        />
+                          name="startdate"/>
                       </div>
                     </div>
                   </div>
@@ -53,7 +53,7 @@ Home page
                           type="text"
                           class="form-control checkout_date"
                           placeholder="Check Out Date"
-                        />
+                          name="enddate"/>
                       </div>
                     </div>
                   </div>
@@ -65,21 +65,11 @@ Home page
                           <div class="icon">
                             <span class="ion-ios-arrow-down"></span>
                           </div>
-                          <select name="" id="" class="form-control">
-                            <option value="">$5,000</option>
-                            <option value="">$10,000</option>
-                            <option value="">$50,000</option>
-                            <option value="">$100,000</option>
-                            <option value="">$200,000</option>
-                            <option value="">$300,000</option>
-                            <option value="">$400,000</option>
-                            <option value="">$500,000</option>
-                            <option value="">$600,000</option>
-                            <option value="">$700,000</option>
-                            <option value="">$800,000</option>
-                            <option value="">$900,000</option>
-                            <option value="">$1,000,000</option>
-                            <option value="">$2,000,000</option>
+                          <select name="price" id="" class="form-control">
+                            <option value="1001">$1,000</option>
+                            <option value="5001">$5,000</option>
+                            <option value="10001">$10,000</option>
+                            <option value="50001">$50,000</option>
                           </select>
                         </div>
                       </div>
@@ -90,6 +80,7 @@ Home page
                       <div class="form-field">
                         <input
                           type="submit"
+                          href="{% url 'search' %}"
                           value="Search"
                           class="form-control btn btn-primary"
                         />
